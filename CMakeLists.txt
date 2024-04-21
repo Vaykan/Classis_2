@@ -8,5 +8,4 @@ add_executable(Classis_2 main.cpp
         Person.h
         random.cpp
         random.h
-        NameList.h
 )

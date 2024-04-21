@@ -1,5 +1,4 @@
 #include <iostream>
-#include "NameList.h"
 
 using namespace std;
 
