@@ -15,7 +15,7 @@ const std::string nameList[] = {"Alice", "Bob", "Charlie", "David", "Emma", "Fra
 
 
 
-Person::Person() {
+Person::Person(){
     hitPoints = rGetNum(minHitPoints, maxHitPoints);
     stamina = rGetNum(minStamina, maxStamina);
     strength = rGetNum(minStrength, maxStrength);
@@ -26,13 +26,13 @@ Person::Person() {
 void Person::takeDamage(int damage) {
 
 }
-int Person::getDamageValue() {
-    float condition = 1;
+int Person::getDamageValue(){
+    double condition = 1;
     if(stamina == 0){
         cout << name << " exhausted" << endl;
-    condition = 0.3;
+        condition = 0.3;
     }
-    int dmg = rGetNum(1, 3) * (0.5 * (strength/(maxStrength - minStrength)));
+    double dmg = rGetNum(1, 6) * (0.5 + (strength /(maxStrength - minStrength)));
     return dmg * condition;
 }
 

@@ -14,8 +14,8 @@ private:
     const int minAgility = 60;
     const int maxAgility = 100;
     Person();
-    int hitPoints, stamina;
-    int strength, agility;
+    float hitPoints, stamina;
+    float strength, agility;
     std::string name;
     void takeDamage(int damage);
     int getDamageValue();
