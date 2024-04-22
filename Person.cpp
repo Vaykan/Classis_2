@@ -13,18 +13,26 @@ const std::string nameList[] = {"Alice", "Bob", "Charlie", "David", "Emma", "Fra
                                 "Mason", "Nathan", "Oliver", "Piper", "Quinn", "Ronald", "Scarlett", "Toby", "Ursula", "Vivian",
                                 "Wyatt", "Xander", "Yara", "Zack"};
 
+
+
 Person::Person() {
-    hitPoints = rGetNum(70,100);
-    stamina = rGetNum(80, 100);
-    strength = rGetNum(50, 100);
-    agility = rGetNum(60, 100);
+    hitPoints = rGetNum(minHitPoints, maxHitPoints);
+    stamina = rGetNum(minStamina, maxStamina);
+    strength = rGetNum(minStrength, maxStrength);
+    agility = rGetNum(minAgility, maxAgility);
     name = nameList[rGetNum(0, size(nameList) - 1)];
 }
 
-void Person::takeDamage() {
+void Person::takeDamage(int damage) {
 
 }
 int Person::getDamageValue() {
-
+    float condition = 1;
+    if(stamina == 0){
+        cout << name << " exhausted" << endl;
+    condition = 0.3;
+    }
+    int dmg = rGetNum(1, 3) * (0.5 * (strength/(maxStrength - minStrength)));
+    return dmg * condition;
 }
 
