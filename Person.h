@@ -18,6 +18,8 @@ private:
     float strength, agility;
     std::string name;
     void takeDamage(int damage);
+    void changeStamina(int inputDmg = 0, int outputDmg = 0);
+    void decreaseStamina(int subtrahend);
     int getDamageValue();
 };
 

@@ -33,6 +33,29 @@ int Person::getDamageValue(){
         condition = 0.3;
     }
     double dmg = rGetNum(1, 6) * (0.5 + (strength /(maxStrength - minStrength)));
+    changeStamina(0, dmg);
     return dmg * condition;
+}
+
+void Person::changeStamina(int inputDmg, int outputDmg) {
+    if(stamina != 0){
+        if(inputDmg != 0){
+            int subtrahend = inputDmg / 10;
+            decreaseStamina(subtrahend);
+            cout << "";
+        }
+        if(outputDmg != 0){
+            int subtrahend = outputDmg / 5;
+            decreaseStamina(subtrahend);
+            cout << "";
+        }
+    }
+}
+
+void Person::decreaseStamina(int subtrahend) {
+    stamina -= subtrahend;
+    if(stamina < 0){
+        stamina = 0;
+    }
 }
 
