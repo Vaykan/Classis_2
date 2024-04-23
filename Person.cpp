@@ -24,7 +24,13 @@ Person::Person(){
 }
 
 void Person::takeDamage(int damage) {
-
+    double condition = 0.9;
+    if(stamina == 0){
+        cout << "";
+        condition = 1;
+    }
+    damage *= condition;
+    decreaseHitPoints(tryDodge(damage));
 }
 int Person::getDamageValue(){
     double condition = 1;
@@ -37,7 +43,7 @@ int Person::getDamageValue(){
     return dmg * condition;
 }
 
-void Person::changeStamina(int inputDmg, int outputDmg) {
+void Person::changeStamina(int inputDmg = 0, int outputDmg = 0) {
     if(stamina != 0){
         if(inputDmg != 0){
             int subtrahend = inputDmg / 10;
@@ -59,3 +65,22 @@ void Person::decreaseStamina(int subtrahend) {
     }
 }
 
+void Person::decreaseHitPoints(int subtrahend) {
+    hitPoints -= subtrahend;
+    if(hitPoints < 0){
+        hitPoints = 0;
+    }
+}
+
+int Person::tryDodge(int damage) {
+    if(stamina == 0){
+        return damage;
+    }
+    int chance = 20 * (0.5 + (agility / (maxAgility - minAgility)));
+    if(chance >= rGetNum(1, 100)){
+        cout << "";
+        changeStamina(0, damage);
+        return 0;
+    }
+    return damage;
+}
