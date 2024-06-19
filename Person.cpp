@@ -15,18 +15,18 @@ const std::string nameList[] = {"Alice", "Bob", "Charlie", "David", "Emma", "Fra
 
 
 
-Person::Person(){
-    hitPoints = rGetNum(minHitPoints, maxHitPoints);
-    stamina = rGetNum(minStamina, maxStamina);
-    strength = rGetNum(minStrength, maxStrength);
-    agility = rGetNum(minAgility, maxAgility);
-    name = nameList[rGetNum(0, size(nameList) - 1)];
-}
+Person::Person() :
+hitPoints (rGetNum(minHitPoints,maxHitPoints)),
+stamina (rGetNum(minStamina, maxStamina)),
+strength (rGetNum(minStrength, maxStrength)),
+agility (rGetNum(minAgility, maxAgility)),
+name (nameList[rGetNum(0, size(nameList) - 1)])
+{}
 
-void Person::takeDamage(int damage) {
+void Person::takeDamage(int damage){
     double condition = 0.9;
     if(stamina == 0){
-        cout << "";
+        cout << name << "exhausted\n";
         condition = 1;
     }
     damage *= condition;
@@ -35,11 +35,13 @@ void Person::takeDamage(int damage) {
 int Person::getDamageValue(){
     double condition = 1;
     if(stamina == 0){
-        cout << name << " exhausted" << endl;
+        cout << name << " exhausted\n";
         condition = 0.3;
     }
+
     double dmg = rGetNum(1, 6) * (0.5 + (strength /(maxStrength - minStrength)));
     changeStamina(0, dmg);
+
     return dmg * condition;
 }
 
@@ -48,12 +50,12 @@ void Person::changeStamina(int inputDmg = 0, int outputDmg = 0) {
         if(inputDmg != 0){
             int subtrahend = inputDmg / 10;
             decreaseStamina(subtrahend);
-            cout << "";
+            cout << name << " loss " << subtrahend << " stamina for defence\n";
         }
         if(outputDmg != 0){
             int subtrahend = outputDmg / 5;
             decreaseStamina(subtrahend);
-            cout << "";
+            cout << name << " loss " << subtrahend << " stamina for attack\n";
         }
     }
 }
@@ -78,9 +80,14 @@ int Person::tryDodge(int damage) {
     }
     int chance = 20 * (0.5 + (agility / (maxAgility - minAgility)));
     if(chance >= rGetNum(1, 100)){
-        cout << "";
-        changeStamina(0, damage);
+        cout << name << " doodge attack, and get 0 damage\n";
+        changeStamina(damage, 0);
         return 0;
     }
+    cout << name << " take " << damage << " damage\n";
     return damage;
+}
+
+int Person::getHP() {
+    return hitPoints;
 }
